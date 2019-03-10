@@ -6,7 +6,7 @@ const accountRoutes = require('./routes/accountRoutes')
 
 const router = express.Router()
 
-router.use('/', ()=>{
+router.get('/', ()=>{
   res.status(200).send("Here's the server")
 })
 router.use('/users', userRoutes)
