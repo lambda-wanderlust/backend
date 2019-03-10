@@ -10,7 +10,5 @@ const router = express.Router()
 router.use('/users', userRoutes)
 router.use('/trips', tripRoutes)
 router.use('/accounts', accountRoutes)
-router.get('/', ()=>{
-  res.status(200).send("Here's the server")
-})
+
 module.exports = router;
