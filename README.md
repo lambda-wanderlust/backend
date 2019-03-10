@@ -2,7 +2,7 @@
 
 ## Server and Database
 
-###To run locally:
+### To run locally:
 
 Use npm install to install dependencies. (_**npm run start**_)
 
@@ -19,9 +19,9 @@ The default port is 3000.
 [Trips](#trips) |
 [Accounts](#accounts) |
 
-#Schemata
+# Schemata
 
-###Users    
+### Users    
 
 There are two kinds of users, 'guide' and 'user'. A guide has access to the full CRUD functionality; a user has read-only access. All fields are required:
 
