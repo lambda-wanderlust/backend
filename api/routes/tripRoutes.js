@@ -3,7 +3,6 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../../data/dbConfig')
-const tripHelper = require('../../data/helpers/tripsDbHelpers')
 const { authenticate } = require('../../auth/authenticate');
 const { checkRole } = require('../../auth/checkRole');
 
