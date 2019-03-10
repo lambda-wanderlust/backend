@@ -4,7 +4,7 @@ const apiRoutes = require('./api/apiRoutes')
 
 const server = express()
 
-server.get('/', ()=>{res.status(200).send("Here is the server")})
+server.get('/', (req,res)=>{res.status(200).send("Here is the server")})
 
 server.use('/api', apiRoutes)
 
