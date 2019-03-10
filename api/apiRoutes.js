@@ -6,7 +6,7 @@ const accountRoutes = require('./routes/accountRoutes')
 
 const router = express.Router()
 
-
+router.use('/', ()=>{console.log('server is here')})
 router.use('/api/users', userRoutes)
 router.use('/api/trips', tripRoutes)
 router.use('/api/accounts', accountRoutes)
