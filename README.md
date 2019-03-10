@@ -73,7 +73,7 @@ _Example of a Trip Row:_
 | 3   | New York City |     4    |    hours  | guided tour | professional |
 ---
 
-[^Back to Top^]()
+[^Back to Top^](#lambda-wanderlust)
 
 # **App Endpoints**
 
@@ -167,7 +167,7 @@ This permanently removes the user from the database. You may want to give the lo
 
 ---
 
-[^Back to Top^]()
+[^Back to Top^](#lambda-wanderlust)
 
 ## User Accounts
 
@@ -214,7 +214,7 @@ Success: Returns a status of 201 and a JSON object with the token.
 
 ---
 
-[^Back to Top^]()
+[^Back to Top^](#lambda-wanderlust)
 
 
 
