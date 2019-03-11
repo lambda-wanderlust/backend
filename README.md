@@ -23,7 +23,7 @@ The default port is 3000.
 
 ### Users    
 
-There are two kinds of users, 'guide' and 'tourist'. A guide has access to the full CRUD functionality; a user has read-only access. All fields are required:
+There are three kinds of users, 'guide', 'tourist' and admin. A guide has access to the full CRUD functionality for all tripRoutes; a user has read-only access, except for their own account information. Admin has access to all routes. All fields are required:
 
 -   Each user has a unique, auto-incremented id. This is done for you.
 
@@ -177,6 +177,33 @@ This permanently removes the user from the database. You may want to give the lo
 [^Back to Top^](#wanderlust-backend)
 
 ## Accounts
+
+### /api/accounts/   
+
+#### GET  
+
+Brings up a list of all tourists, complete with passwords
+
+### /api/accounts/:id
+
+#### GET   
+
+Brings up the complete profile (i.e., including password) of the tourist with the specified id. Maybe useful for (for example) letting tourist change password.
+
+### /api/account/guides   
+
+
+#### GET
+
+Brings up a list of all guides, complete with their passwords
+
+### /api/account/guides/:id
+
+
+#### GET
+
+Brings up a complete profile of the guide with the specified id. Maybe useful for (for example) letting guide change password.
+
 
 ### /api/accounts/register
 
