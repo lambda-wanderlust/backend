@@ -8,13 +8,10 @@ const { checkAdmin } = require('../../auth/checkAdmin');
 
 router.use(express.json())
 
-router.get('/', authenticate, checkAdmin, (req,res)=>{
+router.get('/', authenticate, (req,res)=>{
   db('users').where('role', 'tourist').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
-
-
 })
-
-router.get('/guides/', authenticate, checkAdmin, (req,res)=>{
+router.get('/guides/',authenticate,  (req,res)=>{
   console.log('in guides')
   db('users').where('role', 'guide').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
 

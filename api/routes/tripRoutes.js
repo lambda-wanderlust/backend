@@ -6,7 +6,6 @@ const db = require('../../data/dbConfig')
 const { authenticate } = require('../../auth/authenticate');
 const { checkRole } = require('../../auth/checkRole');
 
-const accountRoutes = require('./accountRoutes')
 
 router.use(express.json())
 

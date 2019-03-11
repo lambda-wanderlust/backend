@@ -13,7 +13,6 @@ router.get('/', authenticate, (req,res)=>{
 })
 
 router.get('/guides/', authenticate,  (req,res)=>{
-  console.log('in guides')
   db('profiles').where('role', 'guide').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
 
 

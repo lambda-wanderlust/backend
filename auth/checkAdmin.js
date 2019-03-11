@@ -6,12 +6,12 @@ const jwtKey =
 
 // quickly see what this file exports
 module.exports = {
-  checkRole,
+  checkAdmin,
 };
 
 // implementation details
 
-function checkRole(req, res, next) {
+function checkAdmin(req, res, next) {
   const token = req.get('Authorization');
   if (token) {
     console.log('token')
