@@ -8,7 +8,6 @@ const { checkRole } = require('../../auth/checkRole');
 
 
 router.use(express.json())
-
 router.get('/', (req,res)=>{
   db('trips').then(trips=>{res.status(200).json(trips)}).catch(err=>res.status(404).json({err:"No trips found!"}))
 
