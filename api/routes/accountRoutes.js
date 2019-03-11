@@ -8,19 +8,17 @@ const { checkRole } = require('../../auth/checkRole')
 const secret = process.env.JWT_SECRET
 const express = require('express')
 const router = express.Router()
+const express = require('express')
 
+const { authenticate } = require('../../auth/authenticate');
+const { checkRole } = require('../../auth/checkRole');
+const { checkAdmin } = require('../../auth/checkAdmin');
 router.use(express.json())
 
 
 router.post('/register', register);
 router.post('/login', login);
-const express = require('express')
 
-const router = express.Router()
-const db = require('../../data/dbConfig')
-const { authenticate } = require('../../auth/authenticate');
-const { checkRole } = require('../../auth/checkRole');
-const { checkAdmin } = require('../../auth/checkAdmin');
 
 router.use(express.json())
 
