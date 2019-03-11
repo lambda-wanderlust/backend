@@ -85,7 +85,6 @@ router.delete('/:id', (req,res)=>{
 })
 
 module.exports = router
-
 function generateToken(user){
   console.log('in generatetoken')
   console.log(user[0])
@@ -102,7 +101,7 @@ function generateToken(user){
   }
   return jwt.sign(payload,secret,options)
 
-}
+}git
 function register(req, res) {
   const credentials = req.body
   const hash = bcrypt.hashSync(credentials.password, 14)
