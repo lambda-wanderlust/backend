@@ -40,7 +40,7 @@ router.get('/guides/:id',  (req,res)=>{
   db('users').where('id', id).where('role', 'guide').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({err:"Error trying to GET user!"})})
 })
 
-
+///
 router.put('/:id', (req,res)=>{
   console.log('in put')
   console.log(req.body)
