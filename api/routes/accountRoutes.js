@@ -1,11 +1,11 @@
-const axios = require('axios');
+const axios = require('axios')
 const bcrypt = require('bcryptjs')
 const knex = require('knex')
 const db = require('../../data/dbConfig')
 const jwt = require('jsonwebtoken')
-const { authenticate } = require('../../auth/authenticate');
+const { authenticate } = require('../../auth/authenticate')
 const { checkRole } = require('../../auth/checkRole')
-const secret = 'add a .env file to root of project with the JWT_SECRET variable'
+const secret = process.env.JWT_SECRET
 const express = require('express')
 const router = express.Router()
 
