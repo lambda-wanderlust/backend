@@ -35,7 +35,6 @@ router.get('/:id',  (req,res)=>{
 })
 
 
-///
 router.get('/guides/:id',  (req,res)=>{
   const id = req.params.id
   db('users').where('id', id).where('role', 'guide').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({err:"Error trying to GET user!"})})
