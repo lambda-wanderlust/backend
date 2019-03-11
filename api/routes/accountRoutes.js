@@ -5,7 +5,8 @@ const db = require('../../data/dbConfig')
 const jwt = require('jsonwebtoken')
 const { authenticate } = require('../../auth/authenticate')
 const { checkRole } = require('../../auth/checkRole')
-const secret = process.env.JWT_SECRET
+const secret = process.env.JWT_SECRET ||   'add a .env file to root of project with the JWT_SECRET variable';
+
 const express = require('express')
 const router = express.Router()
 
