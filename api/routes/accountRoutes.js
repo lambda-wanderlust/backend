@@ -103,7 +103,6 @@ function generateToken(user){
   return jwt.sign(payload,secret,options)
 
 }
-
 function register(req, res) {
   const credentials = req.body
   const hash = bcrypt.hashSync(credentials.password, 14)
