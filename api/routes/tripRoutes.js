@@ -24,7 +24,7 @@ router.get('/byGuide/:id', (req,res)=>{
   db('trips').where('user_id', id).then(trips=>{res.status(200).json(trips)}).catch(err=>res.status(404).json({err:"No trips found for that guide"}))
 })
 
-router.put('/:id',authenticate, checkRole, (req,res)=>{
+router.put('/:id', (req,res)=>{
   const id = req.params.id
   db('trips')
     .where('id', id)
@@ -48,7 +48,7 @@ router.put('/:id',authenticate, checkRole, (req,res)=>{
 
 })
 
-router.delete('/:id', authenticate, checkRole, (req,res)=>{
+router.delete('/:id',  (req,res)=>{
   const id = req.params.id
   db('trips')
     .where('id', id)
