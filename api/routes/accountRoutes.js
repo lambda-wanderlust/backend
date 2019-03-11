@@ -20,7 +20,6 @@ router.post('/register', register);
 router.post('/login', login);
 
 
-router.use(express.json())
 
 router.get('/', authenticate, (req,res)=>{
   db('users').where('role', 'tourist').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
