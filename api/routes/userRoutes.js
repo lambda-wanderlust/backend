@@ -2,30 +2,32 @@ const express = require('express')
 
 const router = express.Router()
 const db = require('../../data/dbConfig')
+const { authenticate } = require('../../auth/authenticate');
+const { checkRole } = require('../../auth/checkRole');
 
 router.use(express.json())
 
-router.get('/', (req,res)=>{
+router.get('/', authenticate, (req,res)=>{
   db('users').where('role', 'user').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
 
 
 })
 
-router.get('/guides/', (req,res)=>{
+router.get('/guides/', authenticate, (req,res)=>{
   console.log('in guides')
   db('users').where('role', 'guide').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
 
 
 })
 
-router.get('/:id', (req,res)=>{
+router.get('/:id', authenticate, (req,res)=>{
   const id = req.params.id
   db('users').where('id', id).where('role', 'tourist').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({err:"Error trying to GET user!"})})
 })
 
 
 
-router.get('/guides/:id', (req,res)=>{
+router.get('/guides/:id', authenticate,(req,res)=>{
   const id = req.params.id
   db('users').where('id', id).where('role', 'guide').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({err:"Error trying to GET user!"})})
 })
