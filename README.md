@@ -6,7 +6,7 @@
 
 Use npm install to install dependencies. (_**npm run start**_)
 
-The default port is 3000. Random change
+The default port is 3000.
 
 ## Contents
 
@@ -23,7 +23,7 @@ The default port is 3000. Random change
 
 ### Users
 
-There are two kinds of users, 'guide' and 'user'. A guide has access to the full CRUD functionality; a user has read-only access. All fields are required:
+There are three kinds of users, 'guide', 'tourist' and admin. A guide has access to the full CRUD functionality for all tripRoutes; a user has read-only access, except for their own account information. Admin has access to all routes. All fields are required:
 
 - Each user has a unique, auto-incremented id. This is done for you.
 
@@ -33,7 +33,7 @@ There are two kinds of users, 'guide' and 'user'. A guide has access to the full
 
 - The user's **_name_** has a maximum length 255 characters.
 
-- The user's **_role_** must be specified as either 'guide' or 'user'.
+- The user's **_role_** must be specified as either 'guide' or 'tourist'.
 
 - The user's **_email_** can be up to 255 characters.
 
@@ -73,13 +73,13 @@ _Example of a Trip Row:_
 
 ---
 
-[^Back to Top^](#lambda-wanderlust)
+[^Back to Top^](#wanderlust-backend)
 
 # **App Endpoints**
 
 ## Trips
 
-### /api/users
+### /api/Trips
 
 #### GET
 
@@ -120,6 +120,12 @@ Success: Returns a status of 201 and a JSON object with a success message and th
 
 This permanently removes the trip from the database. You may want to give the logged-in guide an opportunity to confirm before finalizing the request to this endpoint. A successful DELETE request to the endpoint returns a status 201 and a message that the trip was deleted.
 
+### /api/trips/byGuide/_{id}_
+
+### GET
+
+This route takes the id of a guide and returns all trips provided by that guide.
+
 ---
 
 [^Back to Top^]()
@@ -138,14 +144,14 @@ A successful GET request to the endpoint returns an array with all user objects 
 
 #### GET
 
-Returns a JSON object with the corresponding 'user'. User must be logged in to access.
+Returns a JSON object with the corresponding 'tourist'. User must be logged in to access.
 
 ```javascript
 {
     "id": 4,
     "username": "bmaverick",
     "name": "Bret Maverick",
-    "role": "user",
+    "role": "tourist",
     "email": "bm1872@zmail.com",
     "phone": "3388976777"
 }
@@ -165,9 +171,33 @@ This permanently removes the user from the database. You may want to give the lo
 
 ---
 
-[^Back to Top^](#lambda-wanderlust)
+[^Back to Top^](#wanderlust-backend)
 
-## User Accounts
+## Accounts
+
+### /api/accounts/
+
+#### GET
+
+Brings up a list of all tourists, complete with passwords
+
+### /api/accounts/:id
+
+#### GET
+
+Brings up the complete profile (i.e., including password) of the tourist with the specified id. Maybe useful for (for example) letting tourist change password.
+
+### /api/account/guides
+
+#### GET
+
+Brings up a list of all guides, complete with their passwords
+
+### /api/account/guides/:id
+
+#### GET
+
+Brings up a complete profile of the guide with the specified id. Maybe useful for (for example) letting guide change password.
 
 ### /api/accounts/register
 
@@ -211,7 +241,7 @@ Success: Returns a status of 201 and a JSON object with the token.
 
 ---
 
-[^Back to Top^](#lambda-wanderlust)
+[^Back to Top^](#wanderlust-backend)
 
 ```
 
