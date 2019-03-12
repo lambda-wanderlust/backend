@@ -126,13 +126,15 @@ function register(req, res) {
 function login(req, res) {
   const credentials = req.body
   db('users').where('username', credentials.username).then(user=>{
-
+    console.log('in login')
+    console.log('user')
+    console.log(user[0].role)
     if(!user || !bcrypt.compareSync(credentials.password, user[0].password)){
       res.status(401).json({error:'incorrect credentials, access denied'})
     }else{
 
       const token = generateToken(user)
-      res.status(200).json({token})
+      res.status(200).json({role:user[0].role, id:user[0].id,token})
     }
 
   }).catch(err=>res.status(500).json({err:err.message}))
