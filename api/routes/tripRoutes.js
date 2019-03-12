@@ -44,6 +44,18 @@ router.put('/:id', (req,res)=>{
 
 })
 
+router.post('/', (req,res)=>{
+  const trip = req.body
+  console.log('in post trips')
+  db('trips').insert(trip).then(
+    (trips)=>{
+      console.log('successfully inserted trip')
+      console.log('trip')
+      console.log(trip)
+      res.status(201).json({message:'Trip added successfully!'})
+}).catch(err=>{res.status(500).send(err)})
+})
+
 router.delete('/:id',  (req,res)=>{
   const id = req.params.id
   db('trips')
