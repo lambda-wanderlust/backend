@@ -25,8 +25,6 @@ router.get('/',  (req,res)=>{
 router.get('/guides/',  (req,res)=>{
   console.log('in guides')
   db('users').where('role', 'guide').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
-
-
 })
 
 router.get('/:id',  (req,res)=>{
@@ -80,17 +78,13 @@ router.delete('/:id', (req,res)=>{
     })
     .catch(err=>{
       res.status(500).json({message:"Internal server error"})
-    }
-    )
-
+    })
 })
 
 module.exports = router
-
 function generateToken(user){
   console.log('in generatetoken')
   console.log(user[0])
-
   const payload = {
     username:user[0].username,
     role:user[0].role
@@ -102,7 +96,6 @@ function generateToken(user){
     jwtid:'12345'
   }
   return jwt.sign(payload,secret,options)
-
 }
 
 function register(req, res) {
