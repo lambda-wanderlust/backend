@@ -108,15 +108,20 @@ function register(req, res) {
         const token = generateToken(user)
         console.log(user)
         console.log(token)
-        res.status(201).json({token})
-
-      })
-      console.log(ids[0])
-    }
-
-  ).catch(err=>{res.status(500).send(err)})
-
-}
+        const userData = user[0]
+        db('profiles').insert(
+          {
+            username:userData.username,
+            name: userData.name,
+            role:userData.role,
+            email:userData.email,
+            phone:userData.phone,
+            user_id: userData.id
+          })
+          .then(user=>{res.status(201).json({token})})
+          .catch(err=>{res.status(500).json({error:"Error inserting into profiles"})})
+    }).catch(err=>{res.status(500).send(err)})
+}).catch(err=>{res.status(500).json({error:"Error inserting into users"})})}
 
 function login(req, res) {
   const credentials = req.body
