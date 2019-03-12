@@ -118,7 +118,7 @@ function register(req, res) {
             phone:userData.phone,
             user_id: userData.id
           })
-          .then(user=>{res.status(201).json({token})})
+          .then(user=>{res.status(201).json({id:userData.id, role:userData.role, token})})
           .catch(err=>{res.status(500).json({error:"Error inserting into profiles"})})
     }).catch(err=>{res.status(500).send(err)})
 }).catch(err=>{res.status(500).json({error:"Error inserting into users"})})}
