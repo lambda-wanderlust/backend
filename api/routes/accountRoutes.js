@@ -136,8 +136,11 @@ function login(req, res) {
   db('users').where('username', credentials.username).then(user=>{
     console.log('in login')
     console.log('user')
-    console.log(user[0].role)
-    if(!user || !bcrypt.compareSync(credentials.password, user[0].password)){
+    console.log('usermsg2')
+    if(user.length ==0){
+      res.status(404).json({error:'That user does not exist!'})
+    }
+    else if(!bcrypt.compareSync(credentials.password, user[0].password)){
       res.status(401).json({error:'incorrect credentials, access denied'})
     }else{
 
