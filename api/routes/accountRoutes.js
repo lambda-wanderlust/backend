@@ -102,26 +102,34 @@ function register(req, res) {
   const credentials = req.body
   const hash = bcrypt.hashSync(credentials.password, 14)
   credentials.password = hash
-  db('users').insert(credentials).then(
-    (ids)=>{
-      db('users').where('id',ids[0]).then(user=>{
-        const token = generateToken(user)
-        console.log(user)
-        console.log(token)
-        const userData = user[0]
-        db('profiles').insert(
-          {
-            username:userData.username,
-            name: userData.name,
-            role:userData.role,
-            email:userData.email,
-            phone:userData.phone,
-            user_id: userData.id
-          })
-          .then(user=>{res.status(201).json({id:userData.id, role:userData.role, token})})
-          .catch(err=>{res.status(500).json({error:"Error inserting into profiles"})})
-    }).catch(err=>{res.status(500).send(err)})
-}).catch(err=>{res.status(500).json({error:"Error inserting into users"})})}
+  db('users').where('username',credentials.username).then(user=>{
+    console.log('user found')
+    console.log(user)
+    console.log(credentials)
+    if(user.length !=0 && user[0].username === credentials.username){
+      res.send({message:"That user already exists!"})
+    }else{db('users').insert(credentials).then(
+      (ids)=>{
+        db('users').where('id',ids[0]).then(user=>{
+          const token = generateToken(user)
+          console.log(user)
+          console.log(token)
+          const userData = user[0]
+          db('profiles').insert(
+            {
+              username:userData.username,
+              name: userData.name,
+              role:userData.role,
+              email:userData.email,
+              phone:userData.phone,
+              user_id: userData.id
+            })
+            .then(user=>{res.status(201).json({id:userData.id, role:userData.role, token})})
+            .catch(err=>{res.status(500).json({error:"Error inserting into profiles"})})
+      }).catch(err=>{res.status(500).send(err)})
+  }).catch(err=>{res.status(401).json({error:err.message})})}
+}).catch(err=>{res.status(500).json({err:err.message})})
+}
 
 function login(req, res) {
   const credentials = req.body
