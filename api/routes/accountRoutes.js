@@ -20,22 +20,22 @@ router.post('/login', login);
 
 
 router.get('/',  (req,res)=>{
-  db('users').where('role', 'tourist').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
+  db('users').where('role', 'tourist').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({message:"No users found!"})})
 })
 router.get('/guides/',  (req,res)=>{
   console.log('in guides')
-  db('users').where('role', 'guide').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({err:"No users found!"})})
+  db('users').where('role', 'guide').then(users=>{res.status(200).json(users)}).catch(err=>{res.status(404).json({message:"No users found!"})})
 })
 
 router.get('/:id',  (req,res)=>{
   const id = req.params.id
-  db('users').where('id', id).where('role', 'tourist').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({err:"Error trying to GET user!"})})
+  db('users').where('id', id).where('role', 'tourist').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({message:"Error trying to GET user!"})})
 })
 
 
 router.get('/guides/:id',  (req,res)=>{
   const id = req.params.id
-  db('users').where('id', id).where('role', 'guide').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({err:"Error trying to GET user!"})})
+  db('users').where('id', id).where('role', 'guide').first().then(users=>{res.status(200).json(users)}).catch(err=>{res.status(500).json({message:"Error trying to GET user!"})})
 })
 
 ///
@@ -61,7 +61,7 @@ router.put('/:id', (req,res)=>{
         res.status(404).json({message: 'No record found!'})
       }
     })
-    .catch(err=>{res.status(500).json({err:'Internal server error'})})
+    .catch(err=>{res.status(500).json({message:'Internal server error'})})
 })
 
 router.delete('/:id', (req,res)=>{
@@ -125,10 +125,10 @@ function register(req, res) {
               user_id: userData.id
             })
             .then(user=>{res.status(201).json({id:userData.id, role:userData.role, token})})
-            .catch(err=>{res.status(500).json({error:"Error inserting into profiles"})})
+            .catch(err=>{res.status(500).json({message:"Error inserting into profiles"})})
       }).catch(err=>{res.status(500).send(err)})
-  }).catch(err=>{res.status(401).json({error:err.message})})}
-}).catch(err=>{res.status(500).json({err:err.message})})
+  }).catch(err=>{res.status(401).json({message:err.message})})}
+}).catch(err=>{res.status(500).json({message:err.message})})
 }
 
 function login(req, res) {
@@ -138,15 +138,15 @@ function login(req, res) {
     console.log('user')
     console.log('usermsg2')
     if(user.length ==0){
-      res.status(404).json({error:'That user does not exist!'})
+      res.status(404).json({message:'That user does not exist!'})
     }
     else if(!bcrypt.compareSync(credentials.password, user[0].password)){
-      res.status(401).json({error:'incorrect credentials, access denied'})
+      res.status(401).json({message:'incorrect credentials, access denied'})
     }else{
 
       const token = generateToken(user)
       res.status(200).json({role:user[0].role, id:user[0].id,token})
     }
 
-  }).catch(err=>res.status(500).json({err:err.message}))
+  }).catch(err=>res.status(500).json({message:err.message}))
 }
