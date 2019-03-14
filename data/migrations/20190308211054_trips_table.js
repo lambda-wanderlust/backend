@@ -22,7 +22,8 @@ exports.up = function(knex, Promise) {
     tbl.integer('user_id')
       .references('id')
       .inTable('users')
-
+      
+    tbl.string('trip_photo', 255)
 
   })
 };
