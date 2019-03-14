@@ -8,19 +8,19 @@ const { checkRole } = require('../../auth/checkRole');
 
 
 router.use(express.json())
-router.get('/', (req,res)=>{
+router.get('/', authenticate, (req,res)=>{
   db('trips').then(trips=>{res.status(200).json(trips)}).catch(err=>res.status(404).json({message:"No trips found!"}))
 
 })
-router.get('/:id', (req,res)=>{
+router.get('/:id',authenticate, (req,res)=>{
   const id = req.params.id
   db('trips').where('id', id).then(trips=>{res.status(200).json(trips)}).catch(err=>res.status(404).json({message:"No trip with that id found!"}))
 })
-router.get('/byGuide/:id', (req,res)=>{
+router.get('/byGuide/:id',authenticate, (req,res)=>{
   const id = req.params.id
   db('trips').where('user_id', id).then(trips=>{res.status(200).json(trips)}).catch(err=>res.status(404).json({message:"No trips found for that guide"}))
 })
-router.put('/:id', (req,res)=>{
+router.put('/:id', authenticate, checkRole,(req,res)=>{
   const id = req.params.id
   db('trips')
     .where('id', id)
@@ -44,17 +44,17 @@ router.put('/:id', (req,res)=>{
 
 })
 
-router.post('/', (req,res)=>{
+router.post('/', authenticate,checkRole,(req,res)=>{
   const trip = req.body
   console.log('in post trips')
   db('trips').insert(trip).then(
     (trips)=>{
-    
+
       res.status(201).json({message:'Trip added successfully!'})
 }).catch(err=>{res.status(500).send(err)})
 })
 
-router.delete('/:id',  (req,res)=>{
+router.delete('/:id', authenticate,checkRole, (req,res)=>{
   const id = req.params.id
   db('trips')
     .where('id', id)
