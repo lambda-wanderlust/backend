@@ -17,6 +17,8 @@ exports.up = function(knex, Promise) {
     tbl.string("service_type", 255)
       .notNullable()
 
+    tbl.text('description').notNullable()
+
     tbl.integer('user_id')
       .references('id')
       .inTable('users')
